@@ -4,6 +4,11 @@
          new/0,
          insert/2,
          delete/2,
+         is_empty/1,
+         head/1,
+         tail/1,
+         reverse/1,
+         concat/2,
          lookup/2
         ]).
 
