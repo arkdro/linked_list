@@ -58,6 +58,16 @@ is_empty(_Config) ->
     ok.
 
 head(_Config) ->
+    try
+        lst:head(lst:new()),
+        erlang:error(should_not_happen)
+    catch error:function_clause ->
+            ok
+    end,
+    L1 = lst:insert(lst:new(), 1),
+    L2 = lst:insert(L1, 2),
+    1 = lst:head(L1),
+    2 = lst:head(L2),
     ok.
 
 tail(_Config) ->
