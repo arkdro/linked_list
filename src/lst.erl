@@ -9,7 +9,7 @@
          tail/1,
          reverse/1,
          concat/2,
-         lookup/2
+         is_member/2
         ]).
 
 new() ->
@@ -35,7 +35,7 @@ delete(Start, L, Val) ->
             end
     end.
 
-lookup(L, Val) ->
+is_member(L, Val) ->
     case is_empty(L) of
         true ->
             false;
@@ -45,7 +45,7 @@ lookup(L, Val) ->
             if Head =:= Val ->
                     true;
                true ->
-                    lookup(Tail, Val)
+                    is_member(Tail, Val)
             end
     end.
 

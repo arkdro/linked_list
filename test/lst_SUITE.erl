@@ -18,7 +18,7 @@ groups() ->
                 is_empty,
                 head,
                 tail,
-                lookup
+                is_member
                ]}
     ].
 
@@ -43,14 +43,14 @@ delete(_Config) ->
     [1, 2, 3, 5, 4] = lst:delete([1, 2, 3, 4, 5, 4], 4),
     ok.
 
-lookup(_Config) ->
-    false = lst:lookup([], 2),
-    true = lst:lookup([1, 2, 3], 1),
-    true = lst:lookup([1, 2, 3], 2),
-    true = lst:lookup([1, 2, 3], 3),
-    false = lst:lookup([1, 2, 3], 4),
-    true = lst:lookup([1, 2, 2, 3], 2),
-    false = lst:lookup([1, 2, 3, 4, 5, 4], 6),
+is_member(_Config) ->
+    false = lst:is_member([], 2),
+    true = lst:is_member([1, 2, 3], 1),
+    true = lst:is_member([1, 2, 3], 2),
+    true = lst:is_member([1, 2, 3], 3),
+    false = lst:is_member([1, 2, 3], 4),
+    true = lst:is_member([1, 2, 2, 3], 2),
+    false = lst:is_member([1, 2, 3, 4, 5, 4], 6),
     ok.
 
 is_empty(_Config) ->
