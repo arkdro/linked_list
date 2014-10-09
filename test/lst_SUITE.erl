@@ -40,5 +40,12 @@ delete(_Config) ->
     ok.
 
 lookup(_Config) ->
+    false = lst:lookup([], 2),
+    true = lst:lookup([1, 2, 3], 1),
+    true = lst:lookup([1, 2, 3], 2),
+    true = lst:lookup([1, 2, 3], 3),
+    false = lst:lookup([1, 2, 3], 4),
+    true = lst:lookup([1, 2, 2, 3], 2),
+    false = lst:lookup([1, 2, 3, 4, 5, 4], 6),
     ok.
 
