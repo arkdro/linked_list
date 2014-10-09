@@ -36,6 +36,7 @@ delete(_Config) ->
     [1, 2] = lst:delete([1, 2, 3], 3),
     [1, 2, 3] = lst:delete([1, 2, 3], 4),
     [1, 2, 3] = lst:delete([1, 2, 2, 3], 2),
+    [1, 2, 3, 5, 4] = lst:delete([1, 2, 3, 4, 5, 4], 4),
     ok.
 
 lookup(_Config) ->
