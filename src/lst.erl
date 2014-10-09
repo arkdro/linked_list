@@ -34,7 +34,18 @@ delete_from_non_empty(Start, L, Val) ->
     end.
 
 lookup(L, Val) ->
-    false.
+    case is_empty(L) of
+        true ->
+            false;
+        false ->
+            Head = head(L),
+            Tail = tail(L),
+            if Head =:= Val ->
+                    true;
+               true ->
+                    lookup(Tail, Val)
+            end
+    end.
 
 reverse(L) ->
     %% stub
