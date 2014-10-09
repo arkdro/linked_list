@@ -16,6 +16,7 @@ groups() ->
                 delete,
                 concat,
                 reverse_iter,
+                reverse_recur,
                 is_empty,
                 head,
                 tail,
@@ -107,5 +108,16 @@ reverse_iter(_Config) ->
     [1] = lst:reverse_iter(L1),
     [1,2,3] = lst:reverse_iter(L3),
     [1,2,3,4] = lst:reverse_iter(L4),
+    ok.
+
+reverse_recur(_Config) ->
+    L1 = lst:insert(lst:new(), 1),
+    L2 = lst:insert(L1, 2),
+    L3 = lst:insert(L2, 3),
+    L4 = lst:insert(L3, 4),
+    [] = lst:reverse_recur(lst:new()),
+    [1] = lst:reverse_recur(L1),
+    [1,2,3] = lst:reverse_recur(L3),
+    [1,2,3,4] = lst:reverse_recur(L4),
     ok.
 
