@@ -9,6 +9,7 @@
          tail/1,
          reverse/1,
          reverse_iter/1,
+         reverse_recur/1,
          concat/2,
          is_member/2
         ]).
@@ -65,6 +66,23 @@ reverse_iter_priv(Acc, L) ->
             Tail = tail(L),
             reverse_iter_priv(insert(Acc, Head), Tail)
     end.
+
+reverse_recur(L) ->
+    reverse_recur_priv(new(), L).
+
+reverse_recur_priv(Acc, L) ->
+    case is_empty(L) of
+        true ->
+            new();
+        false ->
+            Head = head(L),
+            Tail = tail(L),
+            insert_to_end(reverse_recur(Tail), Head)
+    end.
+
+insert_to_end(L, Val) ->
+    L2 = insert(new(), Val),
+    concat(L, L2).
 
 concat(L1, L2) ->
     R1 = reverse(L1),
