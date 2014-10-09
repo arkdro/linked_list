@@ -8,6 +8,7 @@
          head/1,
          tail/1,
          reverse/1,
+         reverse_iter/1,
          concat/2,
          is_member/2
         ]).
@@ -50,8 +51,20 @@ is_member(L, Val) ->
     end.
 
 reverse(L) ->
-    %% stub
-    lists:reverse(L).
+    reverse_iter(L).
+
+reverse_iter(L) ->
+    reverse_iter_priv(new(), L).
+
+reverse_iter_priv(Acc, L) ->
+    case is_empty(L) of
+        true ->
+            Acc;
+        false ->
+            Head = head(L),
+            Tail = tail(L),
+            reverse_iter_priv(insert(Acc, Head), Tail)
+    end.
 
 concat(L1, L2) ->
     R1 = reverse(L1),
