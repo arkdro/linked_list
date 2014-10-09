@@ -21,16 +21,13 @@ delete(Start, L, Val) ->
         true ->
             reverse(Start);
         false ->
-            delete_from_non_empty(Start, L, Val)
-    end.
-
-delete_from_non_empty(Start, L, Val) ->
-    Head = head(L),
-    Tail = tail(L),
-    if Head =:= Val ->
-            concat(reverse(Start), Tail);
-       true ->
-            delete(insert(Start, Head), Tail, Val)
+            Head = head(L),
+            Tail = tail(L),
+            if Head =:= Val ->
+                    concat(reverse(Start), Tail);
+               true ->
+                    delete(insert(Start, Head), Tail, Val)
+            end
     end.
 
 lookup(L, Val) ->
