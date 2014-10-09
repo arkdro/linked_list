@@ -68,9 +68,6 @@ reverse_iter_priv(Acc, L) ->
     end.
 
 reverse_recur(L) ->
-    reverse_recur_priv(new(), L).
-
-reverse_recur_priv(Acc, L) ->
     case is_empty(L) of
         true ->
             new();
