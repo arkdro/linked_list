@@ -1,0 +1,12 @@
+
+Using any programming language you're comfortable with, write the required 
+class(es) to implement
+a simple singly-linked list.
+
+Write two functions to reverse the order of a singly-linked list using 
+your implementation.
+You must provide:
+ 1. An iterative reverse.
+ 2. A recursive reverse.
+ 3. A full suite of automated tests.
+

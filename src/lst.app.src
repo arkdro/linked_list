@@ -1,0 +1,12 @@
+{application, lst,
+ [
+  {description, "Single-linked list"},
+  {vsn, "1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {modules, []},
+  {env, []}
+ ]}.
