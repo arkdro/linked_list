@@ -30,6 +30,12 @@ insert(_Config) ->
     ok.
 
 delete(_Config) ->
+    [] = lst:delete([], 2),
+    [2, 3] = lst:delete([1, 2, 3], 1),
+    [1, 3] = lst:delete([1, 2, 3], 2),
+    [1, 2] = lst:delete([1, 2, 3], 3),
+    [1, 2, 3] = lst:delete([1, 2, 3], 4),
+    [1, 2, 3] = lst:delete([1, 2, 2, 3], 2),
     ok.
 
 lookup(_Config) ->
