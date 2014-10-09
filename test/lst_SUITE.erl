@@ -14,6 +14,9 @@ groups() ->
                 new,
                 insert,
                 delete,
+                is_empty,
+                head,
+                tail,
                 lookup
                ]}
     ].
@@ -47,5 +50,16 @@ lookup(_Config) ->
     false = lst:lookup([1, 2, 3], 4),
     true = lst:lookup([1, 2, 2, 3], 2),
     false = lst:lookup([1, 2, 3, 4, 5, 4], 6),
+    ok.
+
+is_empty(_Config) ->
+    true = lst:is_empty(lst:new()),
+    false = lst:is_empty(lst:insert(lst:new(), 1)),
+    ok.
+
+head(_Config) ->
+    ok.
+
+tail(_Config) ->
     ok.
 
