@@ -14,6 +14,7 @@ groups() ->
                 new,
                 insert,
                 delete,
+                concat,
                 is_empty,
                 head,
                 tail,
@@ -83,5 +84,16 @@ tail(_Config) ->
     [] = lst:tail(L1),
     [1] = lst:tail(L2),
     [2,1] = lst:tail(L3),
+    ok.
+
+concat(_Config) ->
+    L1 = lst:insert(lst:new(), 1),
+    L2 = lst:insert(L1, 2),
+    L3 = lst:insert(L2, 3),
+    L4 = lst:insert(L3, 4),
+    [3,2,1, 2,1] = lst:concat(L3, L2),
+    [4,3,2,1, 2,1] = lst:concat(L4, L2),
+    [4,3,2,1] = lst:concat(L4, lst:new()),
+    [3,2,1] = lst:concat(lst:new(), L3),
     ok.
 
