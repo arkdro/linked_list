@@ -71,5 +71,17 @@ head(_Config) ->
     ok.
 
 tail(_Config) ->
+    try
+        lst:tail(lst:new()),
+        erlang:error(should_not_happen)
+    catch error:function_clause ->
+            ok
+    end,
+    L1 = lst:insert(lst:new(), 1),
+    L2 = lst:insert(L1, 2),
+    L3 = lst:insert(L2, 3),
+    [] = lst:tail(L1),
+    [1] = lst:tail(L2),
+    [2,1] = lst:tail(L3),
     ok.
 
