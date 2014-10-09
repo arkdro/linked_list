@@ -54,8 +54,18 @@ reverse(L) ->
     lists:reverse(L).
 
 concat(L1, L2) ->
-    %% stub
-    L1 ++ L2.
+    R1 = reverse(L1),
+    concat_priv(R1, L2).
+
+concat_priv(R1, L2) ->
+    case is_empty(R1) of
+        true ->
+            L2;
+        false ->
+            Head = head(R1),
+            Tail = tail(R1),
+            concat_priv(Tail, insert(L2, Head))
+    end.
 
 is_empty([]) ->
     true;
