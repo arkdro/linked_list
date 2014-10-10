@@ -11,8 +11,7 @@ all() -> [
 groups() ->
     [
      {lp, [], [
-                new%,
-                %%insert,
+                insert,
                 %% delete,
                 %% concat,
                 %% reverse_iter,
@@ -20,24 +19,33 @@ groups() ->
                 %%is_empty,
                 %% head,
                 %% tail,
-                %% is_member
+                %% is_member,
+                new
                ]}
     ].
 
 new(_Config) ->
     {Tab, Head} = lp:new(),
     1 = ets:info(Tab, size),
-    ct:pal("tab: ~p", [ets:tab2list(Tab)]),
+    %% ct:pal("tab: ~p", [ets:tab2list(Tab)]),
     Expected = lp:new_item(lp:terminal(), undefined),
-    [{_, Expected0}] = ets:lookup(Tab, Head),
+    [{_, Expected}] = ets:lookup(Tab, Head),
     ok.
 
 insert(_Config) ->
     L0 = lp:new(),
+    {Tab, Head0} = L0,
     L1 = lp:insert(L0, 1),
-    L1 = [1],
+    {_, Head1} = L1,
     L2 = lp:insert(L1, 2),
-    L2 = [2,1],
+    {_, Head2} = L2,
+    3 = ets:info(Tab, size),
+    Expected2 = lp:new_item(2, Head1),
+    [{_, Expected2}] = ets:lookup(Tab, Head2),
+    Expected1 = lp:new_item(1, Head0),
+    [{_, Expected1}] = ets:lookup(Tab, Head1),
+    Expected0 = lp:new_item(lp:terminal(), undefined),
+    [{_, Expected0}] = ets:lookup(Tab, Head0),
     ok.
 
 delete(_Config) ->
