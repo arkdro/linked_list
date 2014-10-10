@@ -39,10 +39,10 @@ new_item(Val, Next) ->
     #i{val=Val, next=Next}.
 
 insert({Tab, Head}, Val) ->
-    Key = make_ref(),
+    New_head = make_ref(),
     Item = new_item(Val, Head),
-    ets:insert(Tab, {Key, Item}),
-    {Tab, Key}.
+    ets:insert(Tab, {New_head, Item}),
+    {Tab, New_head}.
 
 delete(L, Val) ->
     delete(new(), L, Val).
