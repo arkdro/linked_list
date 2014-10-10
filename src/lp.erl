@@ -45,21 +45,42 @@ insert({Tab, Head}, Val) ->
     {Tab, New_head}.
 
 delete(L, Val) ->
-    delete(new(), L, Val).
+    delete(undefined, {Tab, Head} = L, Val).
 
-delete(Start, L, Val) ->
+delete(L_prev, {Tab, Head_ptr} = L, Val) ->
     case is_empty(L) of
         true ->
-            reverse(Start);
+            L;
         false ->
-            Head = head(L),
+            Head_item = head(L),
             Tail = tail(L),
-            if Head =:= Val ->
-                    concat(reverse(Start), Tail);
-               true ->
-                    delete(insert(Start, Head), Tail, Val)
+            case item_value(Head_item) of
+                Val when L_prev == undefined ->
+                    unlink_head(L),
+                    Tail;
+                Val ->
+                    delete_item(L_prev, L);
+                true ->
+                    delete(L, Tail, Val)
             end
     end.
+
+item_value(#i{val=Val}) ->
+    Val.
+
+unlink_head({Tab, Key}) ->
+    ets:delete(Tab, Key).
+
+delete_item(L_prev, L) ->
+    Head = head(L),
+    Tail = tail(L),
+    unlink_head(L),
+    link_prev_to_tail(L_prev, Head, Tail).
+
+link_prev_to_tail(L, Key, {_Tab, Tail_head}) ->
+    Item = get_item(L, Key),
+    Upd = Item#i{next=Tail_head},
+    set_item(L, Key).
 
 is_member(L, Val) ->
     case is_empty(L) of
